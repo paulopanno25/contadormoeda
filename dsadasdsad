@@ -1,0 +1,7 @@
+#include <stdio.h>
+int main()
+
+	prinft("este programa é um teste");
+
+	return 0;
+}
