@@ -1,6 +1,6 @@
 # Conta de Moedas Digitais Para Mesa de Sinucas
 
-  Projeto do contador de moedas para mesa de sinuca
+  Projeto do contador de moedas para mesa de sinuca.
 
 # Instação
 
