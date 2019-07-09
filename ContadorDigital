@@ -116,5 +116,5 @@ void main(){
 				printf("O valor em caixa é de %f.\n",valorTotal);
 			break;
 		}
-	}
+	 }
 }
