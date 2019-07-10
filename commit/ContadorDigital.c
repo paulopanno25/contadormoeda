@@ -66,24 +66,17 @@ void Jogo(int Bolas[],int* encacapadas){
 	}
 }
 
-void main(){
+void Menu(int* valorTotal, int* fichas,int* ativo,int* encacapadas){
 	int Bolas[16];
-	int encacapadas=0,fichas=0,ativo=0;
-	int play=1,op;
-	float valor=0,valorTotal=0;
+	int op;
+	char o;
+	float valor=0;
 	disponibilizaBolas(Bolas);
-	srand(time(NULL));
-
-	while(play){
-		if(encacapadas==15){
-			ativo=0;
-			encacapadas=0;
-		}
-		printf("Fichas:%d\n", fichas);
+	system("clear");
+		printf("Dinheiro total: R$ %d\n",*valorTotal);
 		printf("1-Inserir moedas.\n");
 		printf("2-Usar ficha.\n");
 		printf("3-Jogar.\n");
-		printf("4-Dinheiro total.(Requer Senha)\n");
 		scanf("%d",&op);
 		switch(op){
 			case(1):
@@ -91,30 +84,58 @@ void main(){
 					printf("Valor insuficiente insira mais moedas.\n");
 				}
 				else{
-					valorTotal+=valor;
+					*valorTotal+=valor;
 					while(valor>0){
-						++fichas;
+						++(*fichas);
 						--valor;
 					}
 				}
 			break;
 			case(2):
+				if((*ativo)==1){
+					printf("Você já tem uma ficha ativa\n");
+					setbuf(stdin,NULL);
+					o=getchar();
+					break;
+				}
 				if(fichas>0){
-					fichas--;
-					ativo=1;
+					(*fichas)--;
+					(*ativo)=1;
 					disponibilizaBolas(Bolas);
 					printf("Todas as bolas estão disponiveis de novo!\n");
 				}
 				else printf("Você não possui fichas.\n");
 			break;
 			case(3):
-				if(ativo==1)
-					Jogo(Bolas,&encacapadas);
+				if((*ativo)==1)
+					Jogo(Bolas,encacapadas);
 				else printf("Você não usou uma ficha.\n");
 			break;
-			case(4):
-				printf("O valor em caixa é de %f.\n",valorTotal);
-			break;
 		}
-	 }
+
+}
+
+void main(){
+	int valorTotal=0;
+	int fichas=0,ativo=0;
+	int op=0,play=1;
+	int encacapadas=0;
+	srand(time(NULL));
+
+	while(play){
+		if(encacapadas==15){
+			ativo=0;
+			encacapadas=0;
+		}
+		system("clear");
+		printf("-----------------------------------\n");
+		printf("------------Suas Fichas %d---------\n",fichas);
+		printf("-----------------------------------\n");
+		printf("\n\n\n\n");
+		printf("1-Menu\n");
+		scanf("%d",&op);
+		if(op==1){
+			Menu(&valorTotal,&fichas,&ativo,&encacapadas);
+		}
+	}
 }
